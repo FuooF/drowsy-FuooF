@@ -1,4 +1,4 @@
-package com.github.tickstudio;
+package com.github.tickstudio.drowsy;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;

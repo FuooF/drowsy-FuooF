@@ -1,8 +1,7 @@
-package com.github.tickstudio;
+package com.github.tickstudio.drowsy;
 
+import com.github.tickstudio.drowsy.server.domain.DomainRegistry;
 import com.mojang.logging.LogUtils;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -11,7 +10,6 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -21,12 +19,8 @@ public class Drowsy {
     public static final String MODID = "drowsy";
     // 日志
     public static final Logger LOGGER = LogUtils.getLogger();
-    //方块注册表
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
-    // 物品注册表
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
-    // 创造模式标签页 注册表
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
+
+
 
 
 
@@ -38,7 +32,8 @@ public class Drowsy {
 
         //注册到事件总线
         NeoForge.EVENT_BUS.register(this);
-
+        // 注册模组的内容
+        DomainRegistry.registerDomain(modEventBus);
 
         // 注册模组配置
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

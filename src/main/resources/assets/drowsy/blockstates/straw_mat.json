@@ -1,0 +1,13 @@
+  {
+    "variants": {
+      "facing=north,part=foot": { "model": "drowsy:block/straw_mat" },
+      "facing=east,part=foot":  { "model": "drowsy:block/straw_mat"},
+      "facing=south,part=foot": { "model": "drowsy:block/straw_mat" },
+      "facing=west,part=foot":  { "model": "drowsy:block/straw_mat" },
+
+      "facing=north,part=head": { "model": "drowsy:block/straw_mat" },
+      "facing=east,part=head":  { "model": "drowsy:block/straw_mat"},
+      "facing=south,part=head": { "model": "drowsy:block/straw_mat" },
+      "facing=west,part=head":  { "model": "drowsy:block/straw_mat" }
+    }
+  }
