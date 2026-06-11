@@ -7,7 +7,10 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -22,9 +25,15 @@ public class DomainRegistry {
 
     //方块注册表
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Drowsy.MODID);
-    //注册 草席方块
-    public static final DeferredBlock<StrawMatBlock> STRAW_MAT_BLOCK = BLOCKS.registerBlock("straw_mat",
-            StrawMatBlock::new);
+    //注册 草席方块（noOcclusion 防止面剔除吃掉下方方块顶面）
+    public static final DeferredBlock<StrawMatBlock> STRAW_MAT_BLOCK = BLOCKS.register("straw_mat",
+            () -> new StrawMatBlock(BlockBehaviour.Properties.of()
+                    .noOcclusion()
+                    .strength(0.4F)
+                    .sound(SoundType.GRASS)
+                    .ignitedByLava()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
 
     // 方块实体注册表
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
