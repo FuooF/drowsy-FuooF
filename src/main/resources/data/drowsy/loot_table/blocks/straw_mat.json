@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "drowsy:straw_mat"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "drowsy:straw_mat",
+          "properties": {
+            "part": "foot"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
@@ -43,9 +42,7 @@ public class StrawMatBlock extends BuffBedTemplate implements EntityBlock  {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-         return state.getValue(PART) == BedPart.FOOT
-                ? new StrawMatBlockEntity(pos, state)
-                : null;
+        return new StrawMatBlockEntity(pos, state);
     }
 
     // 碰撞箱体积
@@ -56,10 +53,7 @@ public class StrawMatBlock extends BuffBedTemplate implements EntityBlock  {
     }
 
     @Override
-    protected @NotNull RenderShape getRenderShape(BlockState state) {
-        return switch (state.getValue(PART)){
-            case HEAD -> RenderShape.INVISIBLE;
-            case FOOT -> RenderShape.ENTITYBLOCK_ANIMATED;
-        };
+    protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 }
