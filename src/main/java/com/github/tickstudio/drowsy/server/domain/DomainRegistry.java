@@ -6,9 +6,7 @@ import com.github.tickstudio.drowsy.server.domain.block.StrawMatBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -46,7 +44,10 @@ public class DomainRegistry {
     // 注册 草席物品
     public static final DeferredItem<BlockItem> STRAW_MAT_ITEM =
             ITEMS.registerSimpleBlockItem(STRAW_MAT_BLOCK);
-
+    public static final DeferredItem<Item> BUNDLE_GRASS = ITEMS.registerSimpleItem(
+            "bundle_grass",
+            new Item.Properties().stacksTo(64)
+    );
 
 
 
@@ -62,14 +63,16 @@ public class DomainRegistry {
                         // 这是 DisplayItemsGenerator 函数式接口的 lambda 写法
                         // parameters：ItemDisplayParameters，包含启用的功能标志、权限等
                         // output：CreativeModeTab.Output，用来"输出"物品到标签页
-                        output.accept(STRAW_MAT_ITEM.get()); // accept 把 STRAW_MAT_ITEM 添加到标签页里
+                        //用 accept 把 物品 添加到标签页里
+                        output.accept(STRAW_MAT_ITEM.get());
+                        output.accept(BUNDLE_GRASS.get());
                     })
 
                     .build()
     );
     public static void registerDomain(IEventBus modEventBus){
         BLOCK_ENTITIES.register(modEventBus);
-        BLOCKS.register(modEventBus);          // 方块必须最先注册，因为后面方块实体和物品都依赖它
+        BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
     }
